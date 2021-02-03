@@ -1,13 +1,12 @@
 import {button, input, main, resultitlecontainer, resultitle, resultprop, resultprophistory, resultitlehistory} from './dom.js';
 import {Obj} from './bigObj.js';
 
-
 let options = {
     enablehighaccuracy: true
 }
 
 let history = [];
- // -----------------------------------------------------------------
+ 
 function success (pos) {
     let lat, long, gps, city;
     lat = pos.coords.latitude;
@@ -19,7 +18,7 @@ function success (pos) {
    
 
 }
- // -----------------------------------------------------------------
+
 function error (err){
     let lat = null;
     let long = null;
@@ -27,12 +26,10 @@ function error (err){
     let gps = false;
     return new Obj(lat, long, gps, city)
 }
-// -----------------------------------------------------------------------
 
 function findpos(){
     let pos = navigator.geolocation.getCurrentPosition(success, error, options);
 }
-// ----------------------------------------------------------------
 
 button.addEventListener('click', (e) =>{
         e.preventDefault();
@@ -52,10 +49,6 @@ function setDate(){
     }
 }
 
-function elemHistory(){
-    console.log(history);
-}
-
 function painthistory(){
         history.forEach((item, i) =>{
             checkandpaint(item, resultitlehistory[i]);
@@ -63,7 +56,6 @@ function painthistory(){
     })
 }
 
-        
 function checkandpaint(obj, title){
         if(!title){
             return;
@@ -87,8 +79,11 @@ function checkandpaint(obj, title){
                 title.style.backgroundColor = 'green';
         }
    
-    }
+}
 
 // ----------------------------------------------------------------------
+
+findpos();
+
 
 export {success, error, findpos, painthistory, history, checkandpaint}
